@@ -1,17 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Wallet, CheckCircle, AlertCircle, TrendingUp, ShieldAlert } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import {
+  ArrowLeft,
+  Wallet,
+  CheckCircle,
+  AlertCircle,
+  TrendingUp,
+  ShieldAlert,
+} from "lucide-react";
 
 export default function TraderDashboard() {
-  const [walletConnected, setWalletConnected] = useState(false)
+  const [walletConnected, setWalletConnected] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col p-6">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
           <div className="flex gap-6 md:gap-10">
@@ -21,7 +35,10 @@ export default function TraderDashboard() {
               </span>
             </a>
             <nav className="hidden gap-6 md:flex">
-              <a href="/trader" className="flex items-center text-lg font-medium">
+              <a
+                href="/trader"
+                className="flex items-center text-lg font-medium"
+              >
                 Trader Dashboard
               </a>
             </nav>
@@ -34,7 +51,11 @@ export default function TraderDashboard() {
                 <span className="sm:hidden">0x1a2...3b4c</span>
               </Button>
             ) : (
-              <Button onClick={() => setWalletConnected(true)} size="sm" className="h-9">
+              <Button
+                onClick={() => setWalletConnected(true)}
+                size="sm"
+                className="h-9"
+              >
                 <Wallet className="mr-2 h-4 w-4" />
                 <span>Connect Wallet</span>
               </Button>
@@ -58,7 +79,9 @@ export default function TraderDashboard() {
             <Card className="mx-auto max-w-md">
               <CardHeader>
                 <CardTitle>Connect Your Wallet</CardTitle>
-                <CardDescription>Connect your Solana wallet to access the trader dashboard</CardDescription>
+                <CardDescription>
+                  Connect your Solana wallet to access the trader dashboard
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="rounded-lg border p-4 text-center">
@@ -69,7 +92,10 @@ export default function TraderDashboard() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={() => setWalletConnected(true)} className="w-full">
+                <Button
+                  onClick={() => setWalletConnected(true)}
+                  className="w-full"
+                >
                   Connect Wallet
                 </Button>
               </CardFooter>
@@ -78,7 +104,9 @@ export default function TraderDashboard() {
             <Tabs defaultValue="marketplace" className="space-y-6">
               <div className="flex justify-between items-center">
                 <TabsList>
-                  <TabsTrigger value="marketplace">Account Marketplace</TabsTrigger>
+                  <TabsTrigger value="marketplace">
+                    Account Marketplace
+                  </TabsTrigger>
                   <TabsTrigger value="challenge">Challenge</TabsTrigger>
                   <TabsTrigger value="trading">Trading</TabsTrigger>
                   <TabsTrigger value="history">History</TabsTrigger>
@@ -93,9 +121,12 @@ export default function TraderDashboard() {
               <TabsContent value="marketplace" className="space-y-6">
                 <div className="grid gap-6">
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">Account Marketplace</h2>
+                    <h2 className="text-2xl font-bold tracking-tight">
+                      Account Marketplace
+                    </h2>
                     <p className="text-muted-foreground">
-                      Browse available trading accounts and choose one that fits your strategy
+                      Browse available trading accounts and choose one that fits
+                      your strategy
                     </p>
                   </div>
 
@@ -140,17 +171,25 @@ export default function TraderDashboard() {
                       <Card key={i}>
                         <CardHeader>
                           <CardTitle>${account.size} Account</CardTitle>
-                          <CardDescription>Buy-in: ${account.buyIn} (10%)</CardDescription>
+                          <CardDescription>
+                            Buy-in: ${account.buyIn} (10%)
+                          </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
-                              <p className="text-sm font-medium">Profit Target</p>
-                              <p className="text-2xl font-bold">{account.target}</p>
+                              <p className="text-sm font-medium">
+                                Profit Target
+                              </p>
+                              <p className="text-2xl font-bold">
+                                {account.target}
+                              </p>
                             </div>
                             <div className="space-y-1">
                               <p className="text-sm font-medium">Risk Limit</p>
-                              <p className="text-2xl font-bold">{account.risk}</p>
+                              <p className="text-2xl font-bold">
+                                {account.risk}
+                              </p>
                             </div>
                           </div>
                           <div className="rounded-lg bg-muted p-3">
@@ -161,7 +200,9 @@ export default function TraderDashboard() {
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <Button className="w-full">Buy Account (${account.buyIn})</Button>
+                          <Button className="w-full">
+                            Buy Account (${account.buyIn})
+                          </Button>
                         </CardFooter>
                       </Card>
                     ))}
@@ -172,24 +213,34 @@ export default function TraderDashboard() {
               <TabsContent value="challenge" className="space-y-6">
                 <div className="grid gap-6">
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">Trading Challenge</h2>
-                    <p className="text-muted-foreground">Complete the challenge to unlock your funded account</p>
+                    <h2 className="text-2xl font-bold tracking-tight">
+                      Trading Challenge
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Complete the challenge to unlock your funded account
+                    </p>
                   </div>
 
                   <div className="grid gap-6 md:grid-cols-2">
                     <Card>
                       <CardHeader>
                         <CardTitle>Active Challenge</CardTitle>
-                        <CardDescription>$500 Account Challenge</CardDescription>
+                        <CardDescription>
+                          $500 Account Challenge
+                        </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-1">
-                            <p className="text-sm font-medium">Starting Balance</p>
+                            <p className="text-sm font-medium">
+                              Starting Balance
+                            </p>
                             <p className="text-2xl font-bold">$500</p>
                           </div>
                           <div className="space-y-1">
-                            <p className="text-sm font-medium">Current Balance</p>
+                            <p className="text-sm font-medium">
+                              Current Balance
+                            </p>
                             <p className="text-2xl font-bold">$780</p>
                           </div>
                         </div>
@@ -210,14 +261,21 @@ export default function TraderDashboard() {
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Button className="w-full">Open Trading Terminal</Button>
+                        <a
+                          href="/trader/trading"
+                          className="w-full border bg-black p-2 text-white rounded-md"
+                        >
+                          Open Trading Terminal
+                        </a>
                       </CardFooter>
                     </Card>
 
                     <Card>
                       <CardHeader>
                         <CardTitle>Challenge Rules</CardTitle>
-                        <CardDescription>Requirements to pass the challenge</CardDescription>
+                        <CardDescription>
+                          Requirements to pass the challenge
+                        </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="space-y-2">
@@ -225,26 +283,34 @@ export default function TraderDashboard() {
                             <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                             <div>
                               <p className="font-medium">Profit Target</p>
-                              <p className="text-sm text-muted-foreground">Reach $1,000 from starting $500</p>
+                              <p className="text-sm text-muted-foreground">
+                                Reach $1,000 from starting $500
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-start space-x-2">
                             <AlertCircle className="h-5 w-5 text-amber-500 mt-0.5" />
                             <div>
                               <p className="font-medium">Risk Limit</p>
-                              <p className="text-sm text-muted-foreground">Don't lose more than 10% ($50)</p>
+                              <p className="text-sm text-muted-foreground">
+                                Don't lose more than 10% ($50)
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-start space-x-2">
                             <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                             <div>
                               <p className="font-medium">Time Limit</p>
-                              <p className="text-sm text-muted-foreground">Complete within 30 days</p>
+                              <p className="text-sm text-muted-foreground">
+                                Complete within 30 days
+                              </p>
                             </div>
                           </div>
                         </div>
                         <div className="rounded-lg border p-4 mt-2">
-                          <p className="text-sm font-medium">What happens after the challenge?</p>
+                          <p className="text-sm font-medium">
+                            What happens after the challenge?
+                          </p>
                           <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
                             <li className="flex items-center gap-2">
                               <CheckCircle className="h-4 w-4 text-green-500" />
@@ -265,8 +331,12 @@ export default function TraderDashboard() {
               <TabsContent value="trading" className="space-y-6">
                 <div className="grid gap-6">
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">Live Trading</h2>
-                    <p className="text-muted-foreground">Manage your funded trading account</p>
+                    <h2 className="text-2xl font-bold tracking-tight">
+                      Live Trading
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Manage your funded trading account
+                    </p>
                   </div>
 
                   <div className="grid gap-6 md:grid-cols-3">
@@ -278,7 +348,9 @@ export default function TraderDashboard() {
                       <CardContent className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-1">
-                            <p className="text-sm font-medium">Current Balance</p>
+                            <p className="text-sm font-medium">
+                              Current Balance
+                            </p>
                             <p className="text-2xl font-bold">$850</p>
                           </div>
                           <div className="space-y-1">
@@ -299,14 +371,21 @@ export default function TraderDashboard() {
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Button className="w-full">Open Trading Terminal</Button>
+                        <a
+                          href="/trader/trading"
+                          className="w-full border bg-black p-2 text-white rounded-md"
+                        >
+                          Open Trading Terminal
+                        </a>
                       </CardFooter>
                     </Card>
 
                     <Card>
                       <CardHeader>
                         <CardTitle>Safety Metrics</CardTitle>
-                        <CardDescription>Risk management status</CardDescription>
+                        <CardDescription>
+                          Risk management status
+                        </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="space-y-4">
@@ -318,16 +397,21 @@ export default function TraderDashboard() {
                             <div className="h-2 rounded-full bg-primary/20">
                               <div className="h-full w-[30%] rounded-full bg-amber-500"></div>
                             </div>
-                            <p className="text-xs text-muted-foreground">Current drawdown: 3% ($15)</p>
+                            <p className="text-xs text-muted-foreground">
+                              Current drawdown: 3% ($15)
+                            </p>
                           </div>
 
                           <div className="rounded-lg border p-3">
                             <div className="flex items-center space-x-2">
                               <ShieldAlert className="h-5 w-5 text-amber-500" />
-                              <p className="text-sm font-medium">Safety Bot Active</p>
+                              <p className="text-sm font-medium">
+                                Safety Bot Active
+                              </p>
                             </div>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              Automatic protection will trigger if losses reach $50
+                              Automatic protection will trigger if losses reach
+                              $50
                             </p>
                           </div>
                         </div>
@@ -337,12 +421,16 @@ export default function TraderDashboard() {
                     <Card>
                       <CardHeader>
                         <CardTitle>Profit Sharing</CardTitle>
-                        <CardDescription>When you hit the target</CardDescription>
+                        <CardDescription>
+                          When you hit the target
+                        </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium">Your Share (60%)</p>
+                            <p className="text-sm font-medium">
+                              Your Share (60%)
+                            </p>
                             <p className="text-sm font-medium">$600</p>
                           </div>
                           <div className="h-2 rounded-full bg-primary/20">
@@ -352,7 +440,9 @@ export default function TraderDashboard() {
 
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium">Investor Share (40%)</p>
+                            <p className="text-sm font-medium">
+                              Investor Share (40%)
+                            </p>
                             <p className="text-sm font-medium">$400</p>
                           </div>
                           <div className="h-2 rounded-full bg-primary/20">
@@ -363,7 +453,9 @@ export default function TraderDashboard() {
                         <div className="rounded-lg border p-3 mt-2">
                           <div className="flex items-center space-x-2">
                             <TrendingUp className="h-5 w-5 text-green-500" />
-                            <p className="text-sm font-medium">Potential Payout</p>
+                            <p className="text-sm font-medium">
+                              Potential Payout
+                            </p>
                           </div>
                           <p className="mt-1 text-xs text-muted-foreground">
                             $600 profit + $50 buy-in returned = $650 total
@@ -388,19 +480,58 @@ export default function TraderDashboard() {
                           <div>P/L</div>
                         </div>
                         {[
-                          { pair: "SOL/USDC", type: "Long", size: "$100", entry: "22.45 / 24.30", pl: "+$8.20" },
-                          { pair: "BTC/USDC", type: "Short", size: "$150", entry: "28,450 / 27,890", pl: "+$12.50" },
-                          { pair: "ETH/USDC", type: "Long", size: "$200", entry: "1,850 / 1,820", pl: "-$3.25" },
-                          { pair: "AVAX/USDC", type: "Long", size: "$75", entry: "12.80 / 13.45", pl: "+$3.80" },
+                          {
+                            pair: "SOL/USDC",
+                            type: "Long",
+                            size: "$100",
+                            entry: "22.45 / 24.30",
+                            pl: "+$8.20",
+                          },
+                          {
+                            pair: "BTC/USDC",
+                            type: "Short",
+                            size: "$150",
+                            entry: "28,450 / 27,890",
+                            pl: "+$12.50",
+                          },
+                          {
+                            pair: "ETH/USDC",
+                            type: "Long",
+                            size: "$200",
+                            entry: "1,850 / 1,820",
+                            pl: "-$3.25",
+                          },
+                          {
+                            pair: "AVAX/USDC",
+                            type: "Long",
+                            size: "$75",
+                            entry: "12.80 / 13.45",
+                            pl: "+$3.80",
+                          },
                         ].map((trade, i) => (
-                          <div key={i} className="grid grid-cols-5 gap-4 p-4 border-b last:border-0">
+                          <div
+                            key={i}
+                            className="grid grid-cols-5 gap-4 p-4 border-b last:border-0"
+                          >
                             <div>{trade.pair}</div>
-                            <div className={trade.type === "Long" ? "text-green-500" : "text-red-500"}>
+                            <div
+                              className={
+                                trade.type === "Long"
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }
+                            >
                               {trade.type}
                             </div>
                             <div>{trade.size}</div>
                             <div>{trade.entry}</div>
-                            <div className={trade.pl.startsWith("+") ? "text-green-500" : "text-red-500"}>
+                            <div
+                              className={
+                                trade.pl.startsWith("+")
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }
+                            >
                               {trade.pl}
                             </div>
                           </div>
@@ -414,15 +545,21 @@ export default function TraderDashboard() {
               <TabsContent value="history" className="space-y-6">
                 <div className="grid gap-6">
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">Trading History</h2>
-                    <p className="text-muted-foreground">Your past trading accounts and performance</p>
+                    <h2 className="text-2xl font-bold tracking-tight">
+                      Trading History
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Your past trading accounts and performance
+                    </p>
                   </div>
 
                   <div className="grid gap-6">
                     <Card>
                       <CardHeader>
                         <CardTitle>Completed Accounts</CardTitle>
-                        <CardDescription>Your past funded accounts</CardDescription>
+                        <CardDescription>
+                          Your past funded accounts
+                        </CardDescription>
                       </CardHeader>
                       <CardContent>
                         <div className="rounded-md border">
@@ -434,15 +571,42 @@ export default function TraderDashboard() {
                             <div>Payout</div>
                           </div>
                           {[
-                            { size: "$200", buyIn: "$20", target: "2x", result: "Success", payout: "$120" },
-                            { size: "$500", buyIn: "$50", target: "2.5x", result: "Failed", payout: "$0" },
-                            { size: "$300", buyIn: "$30", target: "2x", result: "Success", payout: "$180" },
+                            {
+                              size: "$200",
+                              buyIn: "$20",
+                              target: "2x",
+                              result: "Success",
+                              payout: "$120",
+                            },
+                            {
+                              size: "$500",
+                              buyIn: "$50",
+                              target: "2.5x",
+                              result: "Failed",
+                              payout: "$0",
+                            },
+                            {
+                              size: "$300",
+                              buyIn: "$30",
+                              target: "2x",
+                              result: "Success",
+                              payout: "$180",
+                            },
                           ].map((account, i) => (
-                            <div key={i} className="grid grid-cols-5 gap-4 p-4 border-b last:border-0">
+                            <div
+                              key={i}
+                              className="grid grid-cols-5 gap-4 p-4 border-b last:border-0"
+                            >
                               <div>{account.size}</div>
                               <div>{account.buyIn}</div>
                               <div>{account.target}</div>
-                              <div className={account.result === "Success" ? "text-green-500" : "text-red-500"}>
+                              <div
+                                className={
+                                  account.result === "Success"
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }
+                              >
                                 {account.result}
                               </div>
                               <div>{account.payout}</div>
@@ -455,7 +619,9 @@ export default function TraderDashboard() {
                     <Card>
                       <CardHeader>
                         <CardTitle>Challenge History</CardTitle>
-                        <CardDescription>Your past challenge attempts</CardDescription>
+                        <CardDescription>
+                          Your past challenge attempts
+                        </CardDescription>
                       </CardHeader>
                       <CardContent>
                         <div className="rounded-md border">
@@ -466,16 +632,45 @@ export default function TraderDashboard() {
                             <div>Result</div>
                           </div>
                           {[
-                            { size: "$200", challenge: "$200 → $400", date: "Mar 15, 2025", result: "Passed" },
-                            { size: "$500", challenge: "$500 → $1,250", date: "Feb 28, 2025", result: "Failed" },
-                            { size: "$300", challenge: "$300 → $600", date: "Jan 10, 2025", result: "Passed" },
-                            { size: "$1,000", challenge: "$1,000 → $2,000", date: "Dec 05, 2024", result: "Failed" },
+                            {
+                              size: "$200",
+                              challenge: "$200 → $400",
+                              date: "Mar 15, 2025",
+                              result: "Passed",
+                            },
+                            {
+                              size: "$500",
+                              challenge: "$500 → $1,250",
+                              date: "Feb 28, 2025",
+                              result: "Failed",
+                            },
+                            {
+                              size: "$300",
+                              challenge: "$300 → $600",
+                              date: "Jan 10, 2025",
+                              result: "Passed",
+                            },
+                            {
+                              size: "$1,000",
+                              challenge: "$1,000 → $2,000",
+                              date: "Dec 05, 2024",
+                              result: "Failed",
+                            },
                           ].map((challenge, i) => (
-                            <div key={i} className="grid grid-cols-4 gap-4 p-4 border-b last:border-0">
+                            <div
+                              key={i}
+                              className="grid grid-cols-4 gap-4 p-4 border-b last:border-0"
+                            >
                               <div>{challenge.size}</div>
                               <div>{challenge.challenge}</div>
                               <div>{challenge.date}</div>
-                              <div className={challenge.result === "Passed" ? "text-green-500" : "text-red-500"}>
+                              <div
+                                className={
+                                  challenge.result === "Passed"
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }
+                              >
                                 {challenge.result}
                               </div>
                             </div>
@@ -496,15 +691,21 @@ export default function TraderDashboard() {
             © 2025 Xdegen Pro. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <a href="/terms" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
+            <a
+              href="/terms"
+              className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+            >
               Terms
             </a>
-            <a href="/privacy" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
+            <a
+              href="/privacy"
+              className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+            >
               Privacy
             </a>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
