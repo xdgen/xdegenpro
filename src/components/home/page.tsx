@@ -16,19 +16,19 @@ export default function Landing() {
           <div className="flex flex-1 items-center justify-end space-x-4">
             <nav className="flex items-center space-x-2">
               <a
-                href="/about"
+                href="/"
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 About
               </a>
               <a
-                href="/faq"
+                href="/"
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 FAQ
               </a>
               <a
-                href="/contact"
+                href="/"
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 Contact
