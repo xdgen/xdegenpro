@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 export default function TraderDashboard() {
-  const [walletConnected, setWalletConnected] = useState(false);
+
 
   return (
     <div className="flex min-h-screen flex-col p-6">

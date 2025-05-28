@@ -12,7 +12,7 @@ const AppRoutes: React.FC = () => {
         <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/investor" element={ <ProtectedRoute><InvestorDashboard /></ProtectedRoute>} />
-            <Route path="/trader" element={ <TraderDashboard />} />
+            <Route path="/trader" element={ <ProtectedRoute><TraderDashboard /></ProtectedRoute>} />
             <Route path="/trader/trading" element={<ProtectedRoute><TradingPage /></ProtectedRoute>} />
             
         </Routes>
