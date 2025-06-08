@@ -28,9 +28,103 @@ import {
   ShieldAlert,
   UserCheck,
   UserX,
+  Check,
+  X,
+  TrendingDown,
 } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useState } from "react";
+import { Progress } from "../ui/progress";
+
+
+interface TraderApplication {
+  id: string;
+  traderId: string;
+  accountAmount: number;
+  successfulTrades: number;
+  failedTrades: number;
+  winRate: number;
+  challengesPassed: number;
+  totalChallenges: number;
+  status: "pending" | "approved" | "declined";
+}
+
+const mockApplications: TraderApplication[] = [
+  {
+    id: "APP-001",
+    traderId: "Trader #4",
+    accountAmount: 500,
+    successfulTrades: 2,
+    failedTrades: 1,
+    winRate: 67,
+    challengesPassed: 2,
+    totalChallenges: 3,
+    status: "pending",
+  },
+  {
+    id: "APP-002",
+    traderId: "Trader #5",
+    accountAmount: 300,
+    successfulTrades: 1,
+    failedTrades: 0,
+    winRate: 100,
+    challengesPassed: 2,
+    totalChallenges: 3,
+    status: "pending",
+  },
+  {
+    id: "APP-003",
+    traderId: "Trader #6",
+    accountAmount: 1000,
+    successfulTrades: 3,
+    failedTrades: 2,
+    winRate: 60,
+    challengesPassed: 2,
+    totalChallenges: 3,
+    status: "pending",
+  },
+];
 
 export default function InvestorDashboard() {
+
+  const [applications, setApplications] =
+  useState<TraderApplication[]>(mockApplications);
+  // const [activeTab, setActiveTab] = useState("Applications");
+
+  const handleApprove = (applicationId: string) => {
+    setApplications((prev) =>
+      prev.map((app) =>
+        app.id === applicationId ? { ...app, status: "approved" as const } : app
+      )
+    );
+  };
+
+  const handleDecline = (applicationId: string) => {
+    setApplications((prev) =>
+      prev.map((app) =>
+        app.id === applicationId ? { ...app, status: "declined" as const } : app
+      )
+    );
+  };
+
+  // const getWinRateColor = (winRate: number) => {
+  //   if (winRate >= 80) return "text-green-600";
+  //   if (winRate >= 60) return "text-yellow-600";
+  //   return "text-red-600";
+  // };
+
+  const getWinRateBadgeVariant = (winRate: number) => {
+    if (winRate >= 80) return "default";
+    if (winRate >= 60) return "secondary";
+    return "destructive";
+  };
   return (
     <div className="flex min-h-screen flex-col p-4">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -72,7 +166,7 @@ export default function InvestorDashboard() {
           </div>
 
           <Tabs defaultValue="dashboard" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col gap-y-5 justify-between items-center lg:flex">
               <TabsList>
                 <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
                 <TabsTrigger value="create">Create Account</TabsTrigger>
@@ -488,7 +582,7 @@ export default function InvestorDashboard() {
             </TabsContent>
 
             <TabsContent value="applications" className="space-y-6">
-              <div className="grid gap-6">
+              {/* <div className="grid gap-6">
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">
                     Trader Applications
@@ -584,6 +678,168 @@ export default function InvestorDashboard() {
                     ))}
                   </CardContent>
                 </Card>
+              </div> */}
+
+              {/* Main Content */}
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    Trader Applications
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    Review and approve traders who want to use your funds
+                  </p>
+                </div>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      Pending Applications
+                    </CardTitle>
+                    <CardDescription>
+                      Traders waiting for your approval (
+                      {
+                        applications.filter((app) => app.status === "pending")
+                          .length
+                      }{" "}
+                      pending)
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="bg-gray-50">
+                            <TableHead className="font-semibold">
+                              Application
+                            </TableHead>
+                            <TableHead className="font-semibold">
+                              Account
+                            </TableHead>
+                            <TableHead className="font-semibold">
+                              Trading History
+                            </TableHead>
+                            <TableHead className="font-semibold">
+                              Win Rate
+                            </TableHead>
+                            <TableHead className="font-semibold">
+                              Challenge Progress
+                            </TableHead>
+                            <TableHead className="font-semibold text-center">
+                              Actions
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {applications.map((app) => (
+                            <TableRow
+                              key={app.id}
+                              className="hover:bg-gray-50 transition-colors"
+                            >
+                              <TableCell>
+                                <div className="space-y-1">
+                                  <div className="font-medium text-gray-900">
+                                    {app.id}
+                                  </div>
+                                  <div className="text-sm text-gray-500">
+                                    {app.traderId}
+                                  </div>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  variant="outline"
+                                  className="bg-gray-900 text-white border-gray-900"
+                                >
+                                  ${app.accountAmount.toLocaleString()} Account
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <div className="space-y-1">
+                                  <div className="flex items-center space-x-2 text-sm">
+                                    <TrendingUp className="w-4 h-4 text-green-600" />
+                                    <span className="text-green-600">
+                                      {app.successfulTrades} Successful
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center space-x-2 text-sm">
+                                    <TrendingDown className="w-4 h-4 text-red-600" />
+                                    <span className="text-red-600">
+                                      {app.failedTrades} Failed
+                                    </span>
+                                  </div>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  variant={getWinRateBadgeVariant(app.winRate)}
+                                  className="font-semibold"
+                                >
+                                  {app.winRate}%
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <div className="space-y-2 min-w-[120px]">
+                                  <div className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-green-600" />
+                                    <span className="text-sm text-green-600">
+                                      Passed {app.challengesPassed} of{" "}
+                                      {app.totalChallenges} challenges
+                                    </span>
+                                  </div>
+                                  <Progress
+                                    value={
+                                      (app.challengesPassed /
+                                        app.totalChallenges) *
+                                      100
+                                    }
+                                    className="h-2"
+                                  />
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex items-center justify-center space-x-2">
+                                  {app.status === "pending" ? (
+                                    <>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => handleDecline(app.id)}
+                                        className="hover:bg-red-50 hover:border-red-200 hover:text-red-700"
+                                      >
+                                        <X className="w-4 h-4 mr-1" />
+                                        Decline
+                                      </Button>
+                                      <Button
+                                        size="sm"
+                                        onClick={() => handleApprove(app.id)}
+                                        className="bg-gray-900 hover:bg-gray-800 text-white"
+                                      >
+                                        <Check className="w-4 h-4 mr-1" />
+                                        Approve
+                                      </Button>
+                                    </>
+                                  ) : (
+                                    <Badge
+                                      variant={
+                                        app.status === "approved"
+                                          ? "default"
+                                          : "destructive"
+                                      }
+                                      className="capitalize"
+                                    >
+                                      {app.status}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
@@ -598,136 +854,91 @@ export default function InvestorDashboard() {
                   </p>
                 </div>
 
-                <div className="grid gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Completed Investments</CardTitle>
-                      <CardDescription>
-                        Past funded accounts and their outcomes
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="rounded-md border">
-                        <div className="grid grid-cols-6 gap-4 p-4 font-medium border-b">
-                          <div>Account Size</div>
-                          <div>Target</div>
-                          <div>Trader</div>
-                          <div>Result</div>
-                          <div>Your Profit</div>
-                          <div>Date</div>
-                        </div>
-                        {[
-                          {
-                            size: "$500",
-                            target: "3x",
-                            trader: "Trader #7",
-                            result: "Success",
-                            profit: "+$400",
-                            date: "Mar 10, 2025",
-                          },
-                          {
-                            size: "$200",
-                            target: "2x",
-                            trader: "Trader #8",
-                            result: "Failed",
-                            profit: "-$20",
-                            date: "Feb 15, 2025",
-                          },
-                          {
-                            size: "$1,000",
-                            target: "2.5x",
-                            trader: "Trader #9",
-                            result: "Success",
-                            profit: "+$600",
-                            date: "Jan 20, 2025",
-                          },
-                          {
-                            size: "$300",
-                            target: "2x",
-                            trader: "Trader #10",
-                            result: "Failed",
-                            profit: "-$30",
-                            date: "Dec 05, 2024",
-                          },
-                        ].map((investment, i) => (
-                          <div
-                            key={i}
-                            className="grid grid-cols-6 gap-4 p-4 border-b last:border-0"
-                          >
-                            <div>{investment.size}</div>
-                            <div>{investment.target}</div>
-                            <div>{investment.trader}</div>
-                            <div
-                              className={
-                                investment.result === "Success"
-                                  ? "text-green-500"
-                                  : "text-red-500"
-                              }
-                            >
-                              {investment.result}
-                            </div>
-                            <div
-                              className={
-                                investment.profit.startsWith("+")
-                                  ? "text-green-500"
-                                  : "text-red-500"
-                              }
-                            >
-                              {investment.profit}
-                            </div>
-                            <div>{investment.date}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Performance Summary</CardTitle>
-                      <CardDescription>
-                        Overall investment performance
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid gap-6 md:grid-cols-3">
-                        <div className="rounded-lg border p-4">
-                          <div className="space-y-2">
-                            <p className="text-sm font-medium">
-                              Total Investments
-                            </p>
-                            <p className="text-2xl font-bold">$4,500</p>
-                            <p className="text-xs text-muted-foreground">
-                              Across 8 accounts
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="rounded-lg border p-4">
-                          <div className="space-y-2">
-                            <p className="text-sm font-medium">Total Returns</p>
-                            <p className="text-2xl font-bold text-green-500">
-                              +$950
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              21% overall return
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="rounded-lg border p-4">
-                          <div className="space-y-2">
-                            <p className="text-sm font-medium">Success Rate</p>
-                            <p className="text-2xl font-bold">62.5%</p>
-                            <p className="text-xs text-muted-foreground">
-                              5 of 8 accounts profitable
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                <Card className="overflow-x-auto">
+                  <CardHeader>
+                    <CardTitle>Completed Investments</CardTitle>
+                    <CardDescription>
+                      Past funded accounts and their outcomes
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="rounded-md border overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Account Size</TableHead>
+                            <TableHead>Target</TableHead>
+                            <TableHead>Trader</TableHead>
+                            <TableHead>Result</TableHead>
+                            <TableHead>Your Profit</TableHead>
+                            <TableHead>Date</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {[
+                            {
+                              size: "$500",
+                              target: "3x",
+                              trader: "Trader #7",
+                              result: "Success",
+                              profit: "+$400",
+                              date: "Mar 10, 2025",
+                            },
+                            {
+                              size: "$200",
+                              target: "2x",
+                              trader: "Trader #8",
+                              result: "Failed",
+                              profit: "-$20",
+                              date: "Feb 15, 2025",
+                            },
+                            {
+                              size: "$1,000",
+                              target: "2.5x",
+                              trader: "Trader #9",
+                              result: "Success",
+                              profit: "+$600",
+                              date: "Jan 20, 2025",
+                            },
+                            {
+                              size: "$300",
+                              target: "2x",
+                              trader: "Trader #10",
+                              result: "Failed",
+                              profit: "-$30",
+                              date: "Dec 05, 2024",
+                            },
+                          ].map((investment, i) => (
+                            <TableRow key={i}>
+                              <TableCell>{investment.size}</TableCell>
+                              <TableCell>{investment.target}</TableCell>
+                              <TableCell>{investment.trader}</TableCell>
+                              <TableCell
+                                className={
+                                  investment.result === "Success"
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }
+                              >
+                                {investment.result}
+                              </TableCell>
+                              <TableCell
+                                className={
+                                  investment.profit.startsWith("+")
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }
+                              >
+                                {investment.profit}
+                              </TableCell>
+                              <TableCell>{investment.date}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
           </Tabs>

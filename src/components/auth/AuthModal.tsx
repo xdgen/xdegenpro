@@ -1,13 +1,14 @@
 
+import EmailCheck from "./EmailCheck";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import VerifyLoginForm from "./VerifyLoginForm";
 
 type AuthModalProps = {
   open: boolean;
-  mode: "login" | "register" | "verify";
+  mode: "login" | "register" | "verify" | "emailCheck";
   onClose: () => void;
-  onSwitchMode: (mode: "login" | "register" | "verify") => void;
+  onSwitchMode: (mode: "login" | "register" | "verify" | "emailCheck") => void;
 };
 
 const AuthModal: React.FC<AuthModalProps> = ({ open, mode, onClose, onSwitchMode }) => {
@@ -36,7 +37,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, mode, onClose, onSwitchMode
 
         {mode === "register" && (
           <>
-            <RegisterForm onSuccess={onClose} />
+            <RegisterForm onSuccess={() => onSwitchMode("emailCheck")} />
             <p className="text-sm mt-4">
               Already have an account?{" "}
               <button
@@ -50,6 +51,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, mode, onClose, onSwitchMode
         )}
 
         {mode === "verify" && <VerifyLoginForm onVerified={onClose} />}
+
+        {mode === "emailCheck" && (
+          <EmailCheck onDone={() => onSwitchMode("login")} />
+        )}
       </div>
     </div>
   );
