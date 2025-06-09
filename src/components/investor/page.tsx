@@ -126,7 +126,7 @@ export default function InvestorDashboard() {
     return "destructive";
   };
   return (
-    <div className="flex min-h-screen flex-col p-4">
+    <div className="flex min-h-screen flex-col p-4 ">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
           <div className="flex gap-6 md:gap-10">
@@ -166,7 +166,138 @@ export default function InvestorDashboard() {
           </div>
 
           <Tabs defaultValue="dashboard" className="space-y-6">
-            <div className="flex flex-col gap-y-5 justify-between items-center lg:flex">
+            <div className="flex flex-col gap-y-5 justify-between items-center lg:flex-row">
+              {" "}
+              {/* <div className="grid gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Completed Investments</CardTitle>
+                      <CardDescription>
+                        Past funded accounts and their outcomes
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="rounded-md border">
+                        <div className="grid grid-cols-6 gap-4 p-4 font-medium border-b">
+                          <div>Account Size</div>
+                          <div>Target</div>
+                          <div>Trader</div>
+                          <div>Result</div>
+                          <div>Your Profit</div>
+                          <div>Date</div>
+                        </div>
+                        {[
+                          {
+                            size: "$500",
+                            target: "3x",
+                            trader: "Trader #7",
+                            result: "Success",
+                            profit: "+$400",
+                            date: "Mar 10, 2025",
+                          },
+                          {
+                            size: "$200",
+                            target: "2x",
+                            trader: "Trader #8",
+                            result: "Failed",
+                            profit: "-$20",
+                            date: "Feb 15, 2025",
+                          },
+                          {
+                            size: "$1,000",
+                            target: "2.5x",
+                            trader: "Trader #9",
+                            result: "Success",
+                            profit: "+$600",
+                            date: "Jan 20, 2025",
+                          },
+                          {
+                            size: "$300",
+                            target: "2x",
+                            trader: "Trader #10",
+                            result: "Failed",
+                            profit: "-$30",
+                            date: "Dec 05, 2024",
+                          },
+                        ].map((investment, i) => (
+                          <div
+                            key={i}
+                            className="grid grid-cols-6 gap-4 p-4 border-b last:border-0"
+                          >
+                            <div>{investment.size}</div>
+                            <div>{investment.target}</div>
+                            <div>{investment.trader}</div>
+                            <div
+                              className={
+                                investment.result === "Success"
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }
+                            >
+                              {investment.result}
+                            </div>
+                            <div
+                              className={
+                                investment.profit.startsWith("+")
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }
+                            >
+                              {investment.profit}
+                            </div>
+                            <div>{investment.date}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Performance Summary</CardTitle>
+                      <CardDescription>
+                        Overall investment performance
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid gap-6 md:grid-cols-3">
+                        <div className="rounded-lg border p-4">
+                          <div className="space-y-2">
+                            <p className="text-sm font-medium">
+                              Total Investments
+                            </p>
+                            <p className="text-2xl font-bold">$4,500</p>
+                            <p className="text-xs text-muted-foreground">
+                              Across 8 accounts
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border p-4">
+                          <div className="space-y-2">
+                            <p className="text-sm font-medium">Total Returns</p>
+                            <p className="text-2xl font-bold text-green-500">
+                              +$950
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              21% overall return
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border p-4">
+                          <div className="space-y-2">
+                            <p className="text-sm font-medium">Success Rate</p>
+                            <p className="text-2xl font-bold">62.5%</p>
+                            <p className="text-xs text-muted-foreground">
+                              5 of 8 accounts profitable
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div> */}
               <TabsList>
                 <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
                 <TabsTrigger value="create">Create Account</TabsTrigger>
