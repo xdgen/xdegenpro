@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 export default function TraderDashboard() {
-  const [walletConnected, setWalletConnected] = useState(false);
+
 
   return (
     <div className="flex min-h-screen flex-col p-6">
@@ -44,22 +44,13 @@ export default function TraderDashboard() {
             </nav>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
-            {walletConnected ? (
+
               <Button variant="outline" size="sm" className="h-9">
                 <Wallet className="mr-2 h-4 w-4" />
                 <span className="hidden sm:inline-block">0x1a2...3b4c</span>
                 <span className="sm:hidden">0x1a2...3b4c</span>
               </Button>
-            ) : (
-              <Button
-                onClick={() => setWalletConnected(true)}
-                size="sm"
-                className="h-9"
-              >
-                <Wallet className="mr-2 h-4 w-4" />
-                <span>Connect Wallet</span>
-              </Button>
-            )}
+
           </div>
         </div>
       </header>
@@ -75,32 +66,7 @@ export default function TraderDashboard() {
             </a>
           </div>
 
-          {!walletConnected ? (
-            <Card className="mx-auto max-w-md">
-              <CardHeader>
-                <CardTitle>Connect Your Wallet</CardTitle>
-                <CardDescription>
-                  Connect your Solana wallet to access the trader dashboard
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="rounded-lg border p-4 text-center">
-                  <Wallet className="mx-auto h-12 w-12 text-muted-foreground" />
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    All transactions happen on-chain for full transparency
-                  </p>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  onClick={() => setWalletConnected(true)}
-                  className="w-full"
-                >
-                  Connect Wallet
-                </Button>
-              </CardFooter>
-            </Card>
-          ) : (
+
             <Tabs defaultValue="marketplace" className="space-y-6">
               <div className="flex justify-between items-center">
                 <TabsList>
@@ -682,7 +648,7 @@ export default function TraderDashboard() {
                 </div>
               </TabsContent>
             </Tabs>
-          )}
+
         </div>
       </main>
       <footer className="w-full border-t bg-background py-6">
