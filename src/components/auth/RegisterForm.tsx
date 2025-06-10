@@ -349,15 +349,15 @@ import type { FormEvent } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import axiosInstance from "@/api/axios";
 
-const BASIC_AUTH_USERNAME =
-  import.meta.env.VITE_BASIC_AUTH_USERNAME ||
-  "your_frontend_basic_auth_username"; // Using VITE_ for Vite, adjust for your build tool
-const BASIC_AUTH_PASSWORD =
-  import.meta.env.VITE_BASIC_AUTH_PASSWORD ||
-  "your_frontend_basic_auth_password"; // Using VITE_ for Vite, adjust for your build tool
+// const BASIC_AUTH_USERNAME =
+//   import.meta.env.VITE_BASIC_AUTH_USERNAME ||
+//   "your_frontend_basic_auth_username"; // Using VITE_ for Vite, adjust for your build tool
+// const BASIC_AUTH_PASSWORD =
+//   import.meta.env.VITE_BASIC_AUTH_PASSWORD ||
+//   "your_frontend_basic_auth_password"; // Using VITE_ for Vite, adjust for your build tool
 
 // Encode the credentials once
-const basicAuthToken = btoa(`${BASIC_AUTH_USERNAME}:${BASIC_AUTH_PASSWORD}`);
+// const basicAuthToken = btoa(`${BASIC_AUTH_USERNAME}:${BASIC_AUTH_PASSWORD}`);
 
 const RegisterForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   const [email, setEmail] = useState<string>("");
@@ -417,10 +417,10 @@ const RegisterForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 
     try {
       const response = await axiosInstance.post("/register", payload, {
-        headers: {
-          Authorization: `Basic ${basicAuthToken}`,
-          "Content-Type": "application/json", // Good practice to explicitly set this
-        },
+        // headers: {
+        //   Authorization: `Basic ${basicAuthToken}`,
+        //   "Content-Type": "application/json", // Good practice to explicitly set this
+        // },
       });
 
       console.log("Registration successful:", response.data);
