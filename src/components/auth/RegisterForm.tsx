@@ -417,10 +417,10 @@ const RegisterForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 
     try {
       const response = await axiosInstance.post("/register", payload, {
-        headers: {
-          Authorization: `Basic ${basicAuthToken}`,
-          "Content-Type": "application/json", // Good practice to explicitly set this
-        },
+        // headers: {
+        //   Authorization: `Basic ${basicAuthToken}`,
+        //   "Content-Type": "application/json", // Good practice to explicitly set this
+        // },
       });
 
       console.log("Registration successful:", response.data);
