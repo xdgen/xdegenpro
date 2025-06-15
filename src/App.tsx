@@ -3,6 +3,7 @@ import { BrowserRouter, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import AuthModal from './components/auth/AuthModal';
 import AppRoutes from './routes/AppRoutes';
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC = () => {
   return (
@@ -18,9 +19,9 @@ const MainApp: React.FC = () => {
   const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
   const [authModalOpen, setAuthModalOpen] = useState(true);
-  const [authMode, setAuthMode] = useState<"login" | "register" | "verify" | "emailCheck">(
-    "login"
-  );
+  const [authMode, setAuthMode] = useState<
+    "login" | "register" | "verify" | "forgot" | "reset"
+  >("login");
 
 
   if (loading) return <div>Loading...</div>;
@@ -38,6 +39,7 @@ const MainApp: React.FC = () => {
         />
       )}
       <AppRoutes />
+      <ToastContainer />
     </>
   );
 };

@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+// import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
+
+  // const navigate = useNavigate()
   return (
     <div className="flex min-h-screen flex-col p-6">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -52,20 +55,45 @@ export default function Landing() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-4 md:flex-row">
+                  {/* <Button
+                    size="lg"
+                    className="w-[40%] bg-green-600 from-blue-600 to-indigo-600 cursor-pointer"
+                    onClick={() => {
+                      navigate("/trader");
+                    }}
+                  >
+                    I'm a Trader
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-[40%] cursor-pointer"
+                    onClick={() => {
+                      navigate("/investor");
+                    }}
+                  >
+                    I'm an Investor
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button> */}
+
                   <a href="/trader">
                     <Button
                       size="lg"
-                      className="w-full bg-green-600 from-blue-600 to-indigo-600"
+                      className="w-[100%] bg-green-600 from-blue-600 to-indigo-600 cursor-pointer"
                     >
                       I'm a Trader
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </a>
 
-
-                  
                   <a href="/investor">
-                    <Button size="lg" variant="outline" className="w-full">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="w-[100%] cursor-pointer"
+                    >
                       I'm an Investor
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
