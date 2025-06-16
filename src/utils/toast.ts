@@ -4,10 +4,11 @@ import type { ToastOptions } from "react-toastify";
 const defaultToastOptions: ToastOptions = {
   position: "top-center",
   autoClose: 2000,
-  hideProgressBar: true,
+  hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: false,
   draggable: false,
+  progress: undefined,
 };
 
 export const showSuccessToast = (
