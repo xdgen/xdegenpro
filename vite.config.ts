@@ -11,4 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+  // server: {
+  //   port: 8000, // This will change the port to 8000
+  // },
+});

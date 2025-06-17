@@ -42,6 +42,8 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Progress } from "../ui/progress";
+import useWallet from "@/hooks/useFetchWallet";
+import { showSuccessToast } from "@/utils/toast";
 
 
 interface TraderApplication {
@@ -120,6 +122,16 @@ export default function InvestorDashboard() {
   //   return "text-red-600";
   // };
 
+
+    const wallet = useWallet();
+  
+    const handleCopy = () => {
+      if (!wallet) return;
+      navigator.clipboard.writeText(wallet).then(() => {
+        showSuccessToast("Wallet address copied to clipboard!");
+      });
+    };
+
   const getWinRateBadgeVariant = (winRate: number) => {
     if (winRate >= 80) return "default";
     if (winRate >= 60) return "secondary";
@@ -145,10 +157,16 @@ export default function InvestorDashboard() {
             </nav>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
-            <Button variant="outline" size="sm" className="h-9">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 max-w-[200px] overflow-hidden cursor-pointer"
+              onClick={handleCopy}
+              title="Click to copy wallet address"
+            >
               <Wallet className="mr-2 h-4 w-4" />
-              <span className="hidden sm:inline-block">0x1a2...3b4c</span>
-              <span className="sm:hidden">0x1a2...3b4c</span>
+              <span className="hidden sm:inline-block truncate">{wallet}</span>
+              <span className="sm:hidden truncate max-w-[100px]">{wallet}</span>
             </Button>
           </div>
         </div>
