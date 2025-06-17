@@ -77,7 +77,7 @@ const RegisterForm: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 
   const mutation = useMutation({
     mutationFn: registerUser,
-    onSuccess: (data) => {
+    onSuccess: () => {
       setUser({ email, username, role });
       onSuccess();
     },
