@@ -47,7 +47,7 @@
 import axios from "axios";
 import { showSuccessToast, showErrorToast } from "@/utils/toast"; 
 
-export const BASE_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL = import.meta.env.VITE_API_URL.replace("/api", "");
 
 const axiosInstance = axios.create({
   baseURL: `${BASE_URL}/api`,

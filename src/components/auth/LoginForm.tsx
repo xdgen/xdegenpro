@@ -24,15 +24,26 @@ const LoginForm: React.FC<Props> = ({ onNext }) => {
         password,
       });
 
-      const { accessToken, refreshToken } = response.data;
+      const { role, accessToken, refreshToken } = response.data;
 
       // Save tokens to localStorage
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("role", role);
       // ✅ Fetch and store wallet
       await fetchAndStoreWallet();
+
+      // 🚀 Navigate based on role
+      if (role === "TRADER") {
+        window.location.href = "/trader";
+        onNext();
+      } else if (role === "INVESTOR") {
+        window.location.href = "/investor";
+        onNext();
+      }
+
       showSuccessToast("Login successful!");
-      onNext();
+      // onNext();
     } catch (err: any) {
       showErrorToast(
         err.response?.data?.message || "Login failed. Please try again."
