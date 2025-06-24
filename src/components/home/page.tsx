@@ -1,9 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
 
+
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
+  }, []);
   // const navigate = useNavigate()
   return (
     <div className="flex min-h-screen flex-col p-6">
@@ -78,26 +86,55 @@ export default function Landing() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button> */}
 
-                  <a href="/trader">
-                    <Button
-                      size="lg"
-                      className="w-[100%] bg-green-600 from-blue-600 to-indigo-600 cursor-pointer"
-                    >
-                      I'm a Trader
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
+                  {role === "TRADER" && (
+                    <a href="/trader">
+                      <Button
+                        size="lg"
+                        className="w-[100%] bg-green-600 from-blue-600 to-indigo-600 cursor-pointer"
+                      >
+                        I'm a Trader
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                  )}
 
-                  <a href="/investor">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="w-[100%] cursor-pointer"
-                    >
-                      I'm an Investor
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
+                  {role === "INVESTOR" && (
+                    <a href="/investor">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="w-[100%] cursor-pointer"
+                      >
+                        I'm an Investor
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                  )}
+
+                  {!role && (
+                    <>
+                      <a href="/trader">
+                        <Button
+                          size="lg"
+                          className="w-[100%] bg-green-600 from-blue-600 to-indigo-600 cursor-pointer"
+                        >
+                          I'm a Trader
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </a>
+
+                      <a href="/investor">
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="w-[100%] cursor-pointer"
+                        >
+                          I'm an Investor
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </a>
+                    </>
+                  )}
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Connect your Solana wallet to get started. All transactions

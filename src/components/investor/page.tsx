@@ -31,6 +31,7 @@ import {
   Check,
   X,
   TrendingDown,
+  LogOut,
 } from "lucide-react";
 import {
   Table,
@@ -43,7 +44,8 @@ import {
 import { useState } from "react";
 import { Progress } from "../ui/progress";
 import useWallet from "@/hooks/useFetchWallet";
-import { showSuccessToast } from "@/utils/toast";
+import { showErrorToast, showSuccessToast } from "@/utils/toast";
+import axiosInstance from "@/api/axios";
 
 
 interface TraderApplication {
@@ -132,6 +134,28 @@ export default function InvestorDashboard() {
       });
     };
 
+    const handleLogOut = async () => {
+        try {
+          // Make POST request to backend
+          await axiosInstance.post("/auth/logout");
+    
+          // Clear localStorage or any auth-related data
+          localStorage.removeItem("role");
+          localStorage.removeItem("wallet");
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("accessToken"); // or whatever key you use
+    
+          // Redirect or reload page
+          window.location.href = "/"; // or use navigate('/')
+          showSuccessToast("Login successful!");
+        } catch (err: any) {
+          showErrorToast(
+            err.response?.data?.message || "Logout failed. Please try again."
+          );
+          // console.error("Logout failed:", error);
+        }
+      };
+
   const getWinRateBadgeVariant = (winRate: number) => {
     if (winRate >= 80) return "default";
     if (winRate >= 60) return "secondary";
@@ -168,6 +192,8 @@ export default function InvestorDashboard() {
               <span className="hidden sm:inline-block truncate">{wallet}</span>
               <span className="sm:hidden truncate max-w-[100px]">{wallet}</span>
             </Button>
+
+            <LogOut className="cursor-pointer" onClick={handleLogOut} />
           </div>
         </div>
       </header>

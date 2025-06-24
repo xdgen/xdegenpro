@@ -19,10 +19,12 @@ import {
   AlertCircle,
   TrendingUp,
   ShieldAlert,
+  LogOut,
 } from "lucide-react";
 import 'react-toastify/dist/ReactToastify.css';
-import { showSuccessToast } from "@/utils/toast";
+import { showErrorToast, showSuccessToast } from "@/utils/toast";
 import useWallet from "@/hooks/useFetchWallet";
+import axiosInstance from "@/api/axios";
 
 export default function TraderDashboard() {
 
@@ -33,6 +35,28 @@ export default function TraderDashboard() {
     navigator.clipboard.writeText(wallet).then(() => {
       showSuccessToast("Wallet address copied to clipboard!");
     });
+  };
+
+  const handleLogOut = async () => {
+    try {
+      // Make POST request to backend
+      await axiosInstance.post("/auth/logout");
+
+      // Clear localStorage or any auth-related data
+      localStorage.removeItem("role");
+      localStorage.removeItem("wallet");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken"); // or whatever key you use
+
+      // Redirect or reload page
+      window.location.href = "/"; // or use navigate('/')
+      showSuccessToast("Login successful!");
+    } catch (err: any) {
+      showErrorToast(
+        err.response?.data?.message || "Logout failed. Please try again."
+      );
+      // console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -66,6 +90,8 @@ export default function TraderDashboard() {
               <span className="hidden sm:inline-block truncate">{wallet}</span>
               <span className="sm:hidden truncate max-w-[100px]">{wallet}</span>
             </Button>
+
+            <LogOut className="cursor-pointer" onClick={handleLogOut} />
           </div>
         </div>
       </header>
